@@ -12,7 +12,7 @@ def zigZagRange(flag, i, comp):
 
 
 def pontilhadoPorDifusaoDeErro(caminho, zigzag, name):
-    aux = cv2.imread(caminho, -1) # 0 determina que a img é lida em tons de cinza
+    aux = cv2.imread(caminho, 0) # 0 determina que a img é lida em tons de cinza
     img = cv2.copyMakeBorder(aux, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=0) #aplicação de padding zero com largura 1
 
     
@@ -23,6 +23,8 @@ def pontilhadoPorDifusaoDeErro(caminho, zigzag, name):
 
     alt = np.size(img, 0)
     comp = np.size(img, 1)
+
+    img2 = np.zeros((alt, comp), dtype = np.uint8)
 
     for i in range(1, alt-1):
         
@@ -43,11 +45,13 @@ def pontilhadoPorDifusaoDeErro(caminho, zigzag, name):
             img[i+1][j] = img[i+1][j+1] + (5/16)*erro
             img[i+1][j+1] = img[i+1][j+1] + (1/16)*erro
 
-            img[i][j] = pixel
+            img2[i][j] = pixel
     
-    cv2.imwrite('imgRes/'+name+'.pbm', img)
+    cv2.imwrite('imgRes/'+name+'.pbm', img2)
+
+    print(img2)
 
 
 
-pontilhadoPorDifusaoDeErro('../img/monarch.pgm', True, 'monarchzigzag')
-pontilhadoPorDifusaoDeErro('../img/monarch.pgm', False, 'monarchtnotzigzag')
+pontilhadoPorDifusaoDeErro('../img/rock.pgm', True, 'rockzigzag')
+pontilhadoPorDifusaoDeErro('../img/rock.pgm', False, 'rocknotzigzag')
