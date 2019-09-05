@@ -2,3 +2,9 @@ Listas/*
 Slides/*
 *.pdf
 *.zip
+*.png
+*.pbm
+*.jpg
+*.pgm
+*.vscode
+*.pylintrc
